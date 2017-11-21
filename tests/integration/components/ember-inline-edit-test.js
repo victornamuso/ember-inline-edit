@@ -28,7 +28,9 @@ const classNames = {
   input: ".ember-inline-edit-input",
   saveBtn: ".ember-inline-edit-save",
   cancelBtn: ".ember-inline-edit-cancel",
-  hint: ".ember-inline-edit .hint"
+  hint: ".ember-inline-edit .hint",
+  cancelLink: ".ember-inline-edit-cancel-link",
+  cancelPrefix: ".ember-inline-edit-cancel-prefix"
 }
 
 test("it renders", function(assert) {
@@ -121,6 +123,30 @@ test("it renders a non-default cancel button label", async function(assert) {
 
   await click(classNames.container)
   assert.equal(find(classNames.cancelBtn).innerText.trim(), "x")
+})
+
+test("it renders a cancel link instead of a button", async function(assert){
+  this.render(hbs`{{ember-inline-edit
+                        value=value
+                        cancelType='link'
+                        onSave="onSave"
+                        onCancel="onCancel"}}`)
+
+  await click(classNames.container)
+  assert.ok(find(classNames.cancelLink))
+})
+
+test("it renders text between the save button and the cancel button", async function(assert){
+  this.render(hbs`{{ember-inline-edit
+                        value=value
+                        cancelType='link'
+			cancelPrefix="foo"
+                        onSave="onSave"
+                        onCancel="onCancel"}}`)
+
+  await click(classNames.container)
+  assert.ok(find(classNames.cancelPrefix))
+  assert.ok(find(classNames.cancelPrefix).innerText.trim(),"foo")
 })
 
 test("on click, it renders the hint if present", async function(assert) {

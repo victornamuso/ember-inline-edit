@@ -34,6 +34,8 @@ export default Component.extend({
   editButtonClass: "",
   saveButtonClass: "",
   cancelButtonClass: "",
+  cancelType: "button",
+  cancelPrefix: "",
 
   didInsertElement() {
     this._handleClicks = this._handleClicks.bind(this)

@@ -26,12 +26,28 @@
     </button>
   {{/if}}
 
+  {{#if showCancelPrefix}}
+  <span class="ember-inline-edit-cancel-prefix">
+    {{cancelPrefix}}
+  </span>
+  {{/if}}
+
   {{#if showCancelButton}}
+    {{#if isCancelTypeButton}}
     <button
       {{action attrs.on-cancel bubbles=false}}
       class="ember-inline-edit-cancel {{cancelButtonClass}}">
       {{cancelLabel}}
     </button>
+    {{else}}
+    <a href="#"
+       {{action attrs.on-cancel bubbles=false}}
+       class="ember-inline-edit-cancel-link {{cancelButtonClass}}">
+      {{cancelLabel}}
+    </a>
+
+    {{/if}}
+
   {{/if}}
 </div>
 

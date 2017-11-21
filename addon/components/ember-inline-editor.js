@@ -1,6 +1,7 @@
 import Component from "@ember/component"
 import { get } from "@ember/object"
 import { scheduleOnce } from "@ember/runloop"
+import { equal,notEmpty } from '@ember/object/computed';
 
 import layout from "../templates/components/ember-inline-editor"
 
@@ -14,10 +15,12 @@ const isInputField = el => {
   return ["input", "textarea", "select"].includes(tagName.toLowerCase())
 }
 
+
 export default Component.extend({
   layout,
   classNameBindings: ["isVisible:is-visible:is-hidden"],
-
+  isCancelTypeButton: equal("cancelType","button"),
+  showCancelPrefix: notEmpty("cancelPrefix"),
   textFields: ["search", "url", "text", "phone", "email", "number"],
   textAreaFields: ["textarea"],
 
